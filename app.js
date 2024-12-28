@@ -31,7 +31,7 @@ app.post('/diaries', async (req, res) => {
   res.send(await Diary.find({ _id: diary._id }));
 });
 
-app.put('/diaries/:id/edit', async (req, res) => {
+app.put('/diaries/:id', async (req, res) => {
   const { id } = req.params;
   const diary = await Diary.findByIdAndUpdate(
     id,
@@ -42,6 +42,11 @@ app.put('/diaries/:id/edit', async (req, res) => {
     { new: true }
   );
   res.send(diary);
+});
+
+app.delete('/diaries/:id', async (req, res) => {
+  const { id } = req.params;
+  res.send(await Diary.findByIdAndDelete(id));
 });
 
 app.listen(3000, () => {
