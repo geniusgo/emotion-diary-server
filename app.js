@@ -1,13 +1,14 @@
 const express = require('express');
 const path = require('path');
-const mongoose = require('./config/db');
 const Diary = require('./models/diary');
+const cors = require('cors');
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'static')));
+app.use(cors()); // cors 에러에 대응할 수 있도록 설정
 
 app.get('/diaries', async (req, res) => {
   const diaries = await Diary.find({});
